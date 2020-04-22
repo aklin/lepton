@@ -22,7 +22,7 @@ public interface Store {
 	 * @see #replace(Resource)
 	 */
 	Store initialise(@NotNull final Resource resource) throws
-		Exceptions.AlreadyExists;
+		Exceptions.StoreException;
 
 	/**
 	 * Replace resource. Will throw exception if a resource with the same URI is not found.
@@ -33,7 +33,7 @@ public interface Store {
 	 * @see #initialise(Resource)
 	 */
 	Resource replace(@NotNull final Resource resource) throws
-		Exceptions.NotFound;
+		Exceptions.StoreException;
 
 	/**
 	 * Remove resource or throw exception. This guarantees that a subsequent call
@@ -45,7 +45,8 @@ public interface Store {
 	 * @return Previously stored value
 	 * @throws Exceptions if no resource is found
 	 */
-	Resource remove(@NotNull final Resource resource) throws Exceptions.NotFound;
+	Resource remove(@NotNull final Resource resource) throws
+		Exceptions.StoreException;
 
 	boolean isEmpty();
 }

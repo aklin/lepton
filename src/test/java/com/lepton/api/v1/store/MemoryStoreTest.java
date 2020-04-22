@@ -52,13 +52,13 @@ class MemoryStoreTest {
 
 		try {
 			test.initialise(Const.Users.GUEST);
-		} catch (Exceptions.AlreadyExists alreadyExists) {
+		} catch (Exceptions.StoreException storeException) {
 			fail("initialise failed when it shouldn't");
 		}
 		assertTrue(test.contains(Const.Users.GUEST));
 		try {
 			test.initialise(Const.Users.GUEST);
-		} catch (Exceptions.AlreadyExists e) {
+		} catch (Exceptions.StoreException e) {
 			return;
 		}
 
@@ -72,7 +72,7 @@ class MemoryStoreTest {
 
 		try {
 			test.replace(Const.Users.GUEST);
-		} catch (Exceptions.NotFound notFound) {
+		} catch (Exceptions.StoreException storeException) {
 			failed = true;
 		} finally {
 			if (!failed) {
@@ -85,7 +85,7 @@ class MemoryStoreTest {
 
 		try {
 			test.replace(Const.Users.GUEST);
-		} catch (Exceptions.NotFound notFound) {
+		} catch (Exceptions.StoreException storeException) {
 			fail();
 		}
 	}
@@ -97,7 +97,7 @@ class MemoryStoreTest {
 
 		try {
 			test.remove(Const.Users.GUEST);
-		} catch (Exceptions.NotFound notFound) {
+		} catch (Exceptions.StoreException storeException) {
 			failed = true;
 		} finally {
 			if (!failed) {
@@ -111,7 +111,7 @@ class MemoryStoreTest {
 
 		try {
 			test.remove(Const.Users.GUEST);
-		} catch (Exceptions.NotFound notFound) {
+		} catch (Exceptions.StoreException storeException) {
 			fail();
 		}
 

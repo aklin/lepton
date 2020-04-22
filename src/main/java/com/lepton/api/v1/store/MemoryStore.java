@@ -43,18 +43,20 @@ public class MemoryStore implements Store {
 	}
 
 	@Override
-	public Store initialise(Resource resource) throws Exceptions.AlreadyExists {
+	public Store initialise(Resource resource) throws
+		Exceptions.StoreException {
 		if (store.containsKey(resource.getURI())) {
-			throw new Exceptions.AlreadyExists(resource.getURI());
+			throw new Exceptions.StoreException(resource.getURI());
 		}
 
 		return set(resource);
 	}
 
 	@Override
-	public Resource replace(Resource resource) throws Exceptions.NotFound {
+	public Resource replace(Resource resource) throws
+		Exceptions.StoreException {
 		if (!store.containsKey(resource.getURI())) {
-			throw new Exceptions.NotFound(resource.getURI());
+			throw new Exceptions.StoreException(resource.getURI());
 		}
 
 		return store.put(resource.getURI().intern(), resource);
@@ -62,9 +64,9 @@ public class MemoryStore implements Store {
 	}
 
 	@Override
-	public Resource remove(Resource resource) throws Exceptions.NotFound {
+	public Resource remove(Resource resource) throws Exceptions.StoreException {
 		if (!store.containsKey(resource.getURI())) {
-			throw new Exceptions.NotFound(resource.getURI());
+			throw new Exceptions.StoreException(resource.getURI());
 		}
 
 		return store.remove(resource.getURI());
