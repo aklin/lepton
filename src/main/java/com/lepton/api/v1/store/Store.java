@@ -3,14 +3,16 @@ package com.lepton.api.v1.store;
 import com.lepton.api.v1.core.Exceptions;
 import com.lepton.api.v1.core.Resource;
 
+import javax.validation.constraints.NotNull;
+
 public interface Store {
 	boolean contains(final String uri);
 
-	boolean contains(final Resource resource);
+	boolean contains(@NotNull final Resource resource);
 
-	Resource get(final String uri);
+	Resource get(@NotNull final String uri);
 
-	Store set(final Resource resource);
+	Store set(@NotNull final Resource resource);
 
 	/**
 	 * Store resource. Will throw exception if another resource with the same URI exists.
@@ -19,7 +21,8 @@ public interface Store {
 	 * @return this
 	 * @see #replace(Resource)
 	 */
-	Store initialise(final Resource resource) throws RuntimeException;
+	Store initialise(@NotNull final Resource resource) throws
+		Exceptions.AlreadyExists;
 
 	/**
 	 * Replace resource. Will throw exception if a resource with the same URI is not found.
@@ -29,7 +32,8 @@ public interface Store {
 	 * @throws Exceptions if the resource key is not found in the store
 	 * @see #initialise(Resource)
 	 */
-	Resource replace(final Resource resource) throws RuntimeException;
+	Resource replace(@NotNull final Resource resource) throws
+		Exceptions.NotFound;
 
 	/**
 	 * Remove resource or throw exception. This guarantees that a subsequent call
@@ -41,5 +45,7 @@ public interface Store {
 	 * @return Previously stored value
 	 * @throws Exceptions if no resource is found
 	 */
-	Resource remove(final Resource resource) throws RuntimeException;
+	Resource remove(@NotNull final Resource resource) throws Exceptions.NotFound;
+
+	boolean isEmpty();
 }

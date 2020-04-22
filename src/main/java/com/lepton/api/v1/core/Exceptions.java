@@ -1,9 +1,9 @@
 package com.lepton.api.v1.core;
 
-public class Exceptions {
+public interface Exceptions {
 
 
-	public class AlreadyExists extends Exception {
+	class AlreadyExists extends Exception {
 
 		public AlreadyExists(String uri) {
 			super("CREATE failed: Resource already exists [" + uri + "]");
@@ -11,15 +11,15 @@ public class Exceptions {
 
 	}
 
-	public class NotFound extends Exception {
+	class NotFound extends Exception {
 		public NotFound(String uri) {
 			super("GET failed: Resource not found [" + uri + "]");
 		}
 	}
 
 
-	public class InsufficientPrivs extends Exception {
-		public InsufficientPrivs(Verb verb, String uri) {
+	class InsufficientPrivileges extends Exception {
+		public InsufficientPrivileges(Verb verb, String uri) {
 			super(verb.name() + " failed: Insufficient privileges [" + uri + "]");
 		}
 	}

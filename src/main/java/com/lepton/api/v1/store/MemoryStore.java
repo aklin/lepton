@@ -1,5 +1,6 @@
 package com.lepton.api.v1.store;
 
+import com.lepton.api.v1.core.Exceptions;
 import com.lepton.api.v1.core.Resource;
 import lombok.EqualsAndHashCode;
 
@@ -42,18 +43,18 @@ public class MemoryStore implements Store {
 	}
 
 	@Override
-	public Store initialise(Resource resource) {
+	public Store initialise(Resource resource) throws Exceptions.AlreadyExists {
 		if (store.containsKey(resource.getURI())) {
-			throw new RuntimeException();
+			throw new Exceptions.AlreadyExists(resource.getURI());
 		}
 
 		return set(resource);
 	}
 
 	@Override
-	public Resource replace(Resource resource) {
+	public Resource replace(Resource resource) throws Exceptions.NotFound {
 		if (!store.containsKey(resource.getURI())) {
-			throw new RuntimeException();
+			throw new Exceptions.NotFound(resource.getURI());
 		}
 
 		return store.put(resource.getURI().intern(), resource);
@@ -61,12 +62,17 @@ public class MemoryStore implements Store {
 	}
 
 	@Override
-	public Resource remove(Resource resource) throws RuntimeException {
+	public Resource remove(Resource resource) throws Exceptions.NotFound {
 		if (!store.containsKey(resource.getURI())) {
-			throw new RuntimeException();
+			throw new Exceptions.NotFound(resource.getURI());
 		}
 
 		return store.remove(resource.getURI());
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return store.isEmpty();
 	}
 
 	public static Store getSingleton() {
