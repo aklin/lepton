@@ -1,5 +1,8 @@
-package com.lepton.api.v1.core;
+package com.lepton.api.v1.users;
 
+import com.lepton.api.v1.core.Const;
+import com.lepton.api.v1.core.Resource;
+import com.lepton.api.v1.core.ResourceType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 

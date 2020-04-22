@@ -1,4 +1,4 @@
-package com.lepton.api.v1.core;
+package com.lepton.api.v1.roles;
 
 import lombok.Data;
 

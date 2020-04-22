@@ -1,5 +1,6 @@
 package com.lepton.api.v1.core;
 
+import com.lepton.api.v1.users.User;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -20,5 +21,6 @@ public class Const {
 
 	public static class Magic {
 		public static final int STRUCT_INCREMENT = 32;
+		public static final long INVALID_ID = -1;
 	}
 }

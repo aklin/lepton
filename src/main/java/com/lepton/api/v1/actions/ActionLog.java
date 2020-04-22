@@ -5,13 +5,12 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ActionLog {
 
-	public static boolean exec(final Action action) {
+	public static void queue(final Action action) {
 		try {
 			action.exec();
 		} catch (Exception e) {
-			return false;
+			e.printStackTrace();
 		}
-		return true;
 	}
 
 	public static boolean checkPermission(final Action action) {

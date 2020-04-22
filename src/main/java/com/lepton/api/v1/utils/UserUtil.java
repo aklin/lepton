@@ -1,8 +1,8 @@
 package com.lepton.api.v1.utils;
 
-import com.lepton.api.v1.core.Group;
-import com.lepton.api.v1.core.Permission;
-import com.lepton.api.v1.core.User;
+import com.lepton.api.v1.groups.Group;
+import com.lepton.api.v1.roles.Permission;
+import com.lepton.api.v1.users.User;
 import lombok.experimental.UtilityClass;
 
 import java.util.Set;

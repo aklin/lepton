@@ -1,11 +1,10 @@
 package com.lepton.api.v1.actions;
 
-import com.lepton.api.v1.core.Exceptions;
 import com.lepton.api.v1.core.Resource;
-import com.lepton.api.v1.core.User;
 import com.lepton.api.v1.core.Verb;
 import com.lepton.api.v1.store.MemoryStore;
 import com.lepton.api.v1.store.Store;
+import com.lepton.api.v1.users.User;
 import lombok.Data;
 
 @Data
@@ -14,11 +13,15 @@ public class Action {
 	private final User actor;
 	private final Resource subject;
 
-	public void beforeExec() {
+	public void preExecHook() {
 
 	}
 
-	public void postExec(Resource result) {
+	public void onSuccessHook(Resource result) {
+
+	}
+
+	public void onFailureHook(Exception exception) {
 
 	}
 
@@ -29,16 +32,15 @@ public class Action {
 
 	public final Resource exec() {
 		final Store store = MemoryStore.getSingleton();
-
+		final Resource result;
 		try {
 
 			if (!hasPermissions()) {
-				throw new Exceptions();
+				throw new RuntimeException();
 			}
 
-			beforeExec();
+			preExecHook();
 
-			final Resource result;
 			switch (verb) {
 				case CREATE:
 					store.initialise(subject);
@@ -57,12 +59,12 @@ public class Action {
 					result = null;
 			}
 
-			postExec(result);
-
+			onSuccessHook(result);
 			return result;
 
-		} catch (Exceptions e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			onFailureHook(e);
 		}
 
 		return null;
