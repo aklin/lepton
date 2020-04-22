@@ -1,10 +1,12 @@
 package com.lepton.api.v1.store;
 
 import com.lepton.api.v1.core.Resource;
+import lombok.EqualsAndHashCode;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@EqualsAndHashCode
 public class MemoryStore implements Store {
 	private static final Store singleton;
 
@@ -14,13 +16,18 @@ public class MemoryStore implements Store {
 
 	private final Map<String, Resource> store;
 
-	public MemoryStore() {
+	MemoryStore() {
 		store = new HashMap<>(128);
 	}
 
 	@Override
 	public boolean contains(final String uri) {
 		return store.containsKey(uri);
+	}
+
+	@Override
+	public boolean contains(Resource resource) {
+		return contains(resource.getURI());
 	}
 
 	@Override

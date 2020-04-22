@@ -5,9 +5,11 @@ import com.lepton.api.v1.core.Resource;
 import com.lepton.api.v1.core.ResourceType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
 @EqualsAndHashCode
+@RequiredArgsConstructor
 public class User implements Resource {
 	private final ResourceType type = Const.ResourceTypes.USER;
 
@@ -19,12 +21,5 @@ public class User implements Resource {
 
 	public User(long id, String loginIdentifier) {
 		this(id, loginIdentifier, false);
-	}
-
-
-	User(long id, String loginIdentifier, boolean systemUser) {
-		this.id = id;
-		this.loginIdentifier = loginIdentifier;
-		this.systemUser = systemUser;
 	}
 }

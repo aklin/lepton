@@ -6,6 +6,8 @@ import com.lepton.api.v1.core.Resource;
 public interface Store {
 	boolean contains(final String uri);
 
+	boolean contains(final Resource resource);
+
 	Resource get(final String uri);
 
 	Store set(final Resource resource);

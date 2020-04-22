@@ -8,6 +8,12 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 
+/**
+ * Set of users and Roles.
+ *
+ * @see com.lepton.api.v1.users.User
+ * @see com.lepton.api.v1.roles.Role
+ */
 @Getter
 @EqualsAndHashCode
 @RequiredArgsConstructor

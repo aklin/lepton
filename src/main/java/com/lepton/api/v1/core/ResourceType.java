@@ -22,7 +22,11 @@ public class ResourceType {
 		this.root = parent == null;
 		this.name = name;
 		this.parent = parent;
-		this.path = (isRoot() ? "/" : parent.getPath())
-			+ name + "/";
+
+		if (parent != null) {
+			this.path = parent.getPath() + name + "/";
+		} else {
+			this.path = "/" + name + "/";
+		}
 	}
 }
