@@ -60,7 +60,6 @@ public class MemoryStore implements Store {
 		}
 
 		return store.put(resource.getURI().intern(), resource);
-
 	}
 
 	@Override
