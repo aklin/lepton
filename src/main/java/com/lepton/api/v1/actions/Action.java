@@ -13,15 +13,15 @@ public class Action {
 	private final User actor;
 	private final Resource subject;
 
-	public void preExecHook() {
+	protected void preExecHook() {
 
 	}
 
-	public void onSuccessHook(Resource result) {
+	protected void onSuccessHook(Resource result) {
 
 	}
 
-	public void onFailureHook(Exception exception) {
+	protected void onFailureHook(Exception exception) {
 
 	}
 

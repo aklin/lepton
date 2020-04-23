@@ -1,7 +1,6 @@
 package com.lepton.api.v1.roles;
 
 import com.lepton.api.v1.actions.Action;
-import com.lepton.api.v1.core.Exceptions;
 import com.lepton.api.v1.core.Verb;
 import com.lepton.api.v1.groups.Group;
 import com.lepton.api.v1.store.MemoryStore;
@@ -33,7 +32,7 @@ public class Roles {
 	public static Action removeRoleFromGroup(
 		final Group group,
 		final Role... roles
-	) throws Exceptions.StoreException {
+	) {
 		final Group.GroupBuilder builder = group.toBuilder();
 		final Set<Role> existingRoles = group.getRoles();
 
