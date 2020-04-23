@@ -2,7 +2,6 @@ package com.lepton.api.v1.roles;
 
 import com.lepton.api.v1.actions.Action;
 import com.lepton.api.v1.core.Verb;
-import com.lepton.api.v1.groups.Group;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
@@ -16,11 +15,11 @@ class RolesTest {
 	private static int permCount = 0;
 
 	private Permission testPermission() {
-		return Permission.builder().build();
+		return Permission.builder().id(permCount++).build();
 	}
 
 	private Role testRole() {
-		return Role.builder().name("unit-test-r-" + roleCount++).build();
+		return Role.builder().id(roleCount++).name("unit-test").build();
 	}
 
 	@Test
@@ -30,7 +29,7 @@ class RolesTest {
 		final Permission permission1 = testPermission(), permission2 = testPermission(), permission3 = testPermission(), permission4 = testPermission();
 		final Set<Permission> newPermissions = new HashSet<>();
 		final Action result;
-		final Group newGroup;
+		final Role newRole;
 
 		assertEquals(0, role.getPermissions().size());
 		result = Roles.addPermissionToRole(role,
@@ -38,15 +37,15 @@ class RolesTest {
 			permission2,
 			permission4,
 			permission3);
-		newGroup = ((Group) result.getSubject());
-		assertEquals(4, newGroup.getRoles().size());
+		newRole = ((Role) result.getSubject());
+		assertEquals(4, newRole.getPermissions().size());
 
 		newPermissions.add(permission1);
 		newPermissions.add(permission2);
 		newPermissions.add(permission3);
 		newPermissions.add(permission4);
 
-		assertTrue(newGroup.getRoles().containsAll(newPermissions));
+		assertTrue(newRole.getPermissions().containsAll(newPermissions));
 
 
 		assertEquals(Verb.UPDATE, result.getVerb());
