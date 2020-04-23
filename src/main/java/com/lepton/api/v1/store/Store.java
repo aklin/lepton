@@ -4,8 +4,9 @@ import com.lepton.api.v1.core.Exceptions;
 import com.lepton.api.v1.core.Resource;
 
 import javax.validation.constraints.NotNull;
+import java.io.Closeable;
 
-public interface Store {
+public interface Store extends Closeable {
 	boolean contains(final String uri);
 
 	boolean contains(@NotNull final Resource resource);
@@ -29,7 +30,7 @@ public interface Store {
 	 *
 	 * @param resource Resource
 	 * @return Previous value
-	 * @throws Exceptions if the resource key is not found in the store
+	 * @throws Exceptions.StoreException if the resource key is not found in the store
 	 * @see #initialise(Resource)
 	 */
 	Resource replace(@NotNull final Resource resource) throws
@@ -43,7 +44,7 @@ public interface Store {
 	 *
 	 * @param resource Resource to remove
 	 * @return Previously stored value
-	 * @throws Exceptions if no resource is found
+	 * @throws Exceptions.StoreException if no resource is found
 	 */
 	Resource remove(@NotNull final Resource resource) throws
 		Exceptions.StoreException;

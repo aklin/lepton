@@ -6,12 +6,13 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class Const {
 	public static class ResourceTypes {
-		public static final ResourceType USER = new ResourceType(null, "user");
-		public static final ResourceType PERMISSION = new ResourceType(USER, "permission");
-		public static final ResourceType ROLE = new ResourceType(USER, "role");
-		public static final ResourceType GROUP = new ResourceType(USER, "group");
+		public static final Directory USER = new Directory(null, "user");
+		public static final Directory PERMISSION = new Directory(USER,
+			"permission");
+		public static final Directory ROLE = new Directory(USER, "role");
+		public static final Directory GROUP = new Directory(USER, "group");
 
-		public static final ResourceType ACTION = new ResourceType(USER, "action");
+		public static final Directory ACTION = new Directory(USER, "action");
 	}
 
 	public static class Users {

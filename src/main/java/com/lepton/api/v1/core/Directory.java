@@ -7,8 +7,8 @@ import javax.validation.constraints.NotEmpty;
 
 @Getter
 @EqualsAndHashCode
-public class ResourceType {
-	private final ResourceType parent;
+public class Directory {
+	private final Directory parent;
 
 	@NotEmpty
 	private final String name;
@@ -18,7 +18,7 @@ public class ResourceType {
 
 	private final boolean root;
 
-	public ResourceType(final ResourceType parent, final String name) {
+	public Directory(final Directory parent, final String name) {
 		this.root = parent == null;
 		this.name = name;
 		this.parent = parent;

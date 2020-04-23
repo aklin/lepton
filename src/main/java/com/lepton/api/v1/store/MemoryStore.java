@@ -80,4 +80,9 @@ public class MemoryStore implements Store {
 	public static Store getSingleton() {
 		return singleton;
 	}
+
+	@Override
+	public void close() {
+
+	}
 }

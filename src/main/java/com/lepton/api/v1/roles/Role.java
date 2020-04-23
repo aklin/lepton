@@ -1,8 +1,8 @@
 package com.lepton.api.v1.roles;
 
 import com.lepton.api.v1.core.Const;
+import com.lepton.api.v1.core.Directory;
 import com.lepton.api.v1.core.Resource;
-import com.lepton.api.v1.core.ResourceType;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -27,7 +27,7 @@ public final class Role implements Resource {
 	private final String description;
 
 	@Override
-	public ResourceType getType() {
+	public Directory getType() {
 		return Const.ResourceTypes.ROLE;
 	}
 }
