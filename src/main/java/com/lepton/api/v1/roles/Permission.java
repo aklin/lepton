@@ -15,7 +15,7 @@ import java.util.Set;
  * Grant the following verbs to the associated resources.
  */
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @EqualsAndHashCode
 public class Permission implements Resource {
 
