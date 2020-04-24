@@ -10,6 +10,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Action object. Actions have a <b>verb</b>, a <b>subject</b> ({@link Resource}
+ * to be acted upon) and an <b>actor</b> (the {@link User} who created the action).
+ */
 @Data
 @Getter
 @EqualsAndHashCode
