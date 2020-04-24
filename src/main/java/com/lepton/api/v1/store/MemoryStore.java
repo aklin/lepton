@@ -37,13 +37,13 @@ public class MemoryStore implements Store {
 	}
 
 	@Override
-	public Store set(Resource resource) {
+	public Resource set(Resource resource) {
 		store.put(resource.getURI().intern(), resource);
-		return this;
+		return resource;
 	}
 
 	@Override
-	public Store initialise(Resource resource) throws
+	public Resource initialise(Resource resource) throws
 		Exceptions.StoreException {
 		if (store.containsKey(resource.getURI())) {
 			throw new Exceptions.StoreException(resource.getURI());

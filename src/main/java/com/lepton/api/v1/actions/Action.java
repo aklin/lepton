@@ -12,6 +12,7 @@ public class Action {
 	private final Verb verb;
 	private final User actor;
 	private final Resource subject;
+	private transient boolean hasExecuted = false;
 
 	protected void preExecHook() {
 
@@ -30,9 +31,16 @@ public class Action {
 	}
 
 
-	public final Resource exec() {
+	final Resource exec() {
 		final Store store = MemoryStore.getSingleton();
 		final Resource result;
+
+		if (hasExecuted) {
+			throw new RuntimeException("Cannot execute the same action twice");
+		}
+
+		hasExecuted = true;
+
 		try {
 
 			if (!hasPermissions()) {

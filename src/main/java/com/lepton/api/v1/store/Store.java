@@ -13,7 +13,7 @@ public interface Store extends Closeable {
 
 	Resource get(@NotNull final String uri);
 
-	Store set(@NotNull final Resource resource);
+	Resource set(@NotNull final Resource resource);
 
 	/**
 	 * Store resource. Will throw exception if another resource with the same URI exists.
@@ -22,7 +22,7 @@ public interface Store extends Closeable {
 	 * @return this
 	 * @see #replace(Resource)
 	 */
-	Store initialise(@NotNull final Resource resource) throws
+	Resource initialise(@NotNull final Resource resource) throws
 		Exceptions.StoreException;
 
 	/**

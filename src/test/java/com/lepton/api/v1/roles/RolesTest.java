@@ -32,7 +32,7 @@ class RolesTest {
 		final Role newRole;
 
 		assertEquals(0, role.getPermissions().size());
-		result = Roles.addPermissionToRole(role,
+		result = Roles.grantPermission(role,
 			permission1,
 			permission2,
 			permission4,
@@ -54,22 +54,20 @@ class RolesTest {
 	@Test
 	void removePermissionFromRole() {
 		final Role role = testRole();
-		final Permission permission1 = testPermission();
+		final Permission permission = testPermission();
 		final Action result;
 		final Role newRole1, newRole2;
 
 		assertEquals(0, role.getPermissions().size());
-		newRole1 = ((Role) Roles.addPermissionToRole(role, permission1)
+		newRole1 = ((Role) Roles.grantPermission(role, permission)
 			.getSubject());
 
-		assertTrue(newRole1.getPermissions().contains(permission1));
+		assertTrue(newRole1.getPermissions().contains(permission));
 
-		result = Roles.removePermissionFromRole(newRole1, permission1);
-		newRole2 = ((Role) Roles.addPermissionToRole(role, permission1)
-			.getSubject());
+		newRole2 = (Role) Roles.revokePermission(newRole1, permission)
+			.getSubject();
 		assertTrue(newRole2.getPermissions().isEmpty());
 
-		assertEquals(Verb.UPDATE, result.getVerb());
 	}
 
 }
