@@ -1,5 +1,6 @@
 package com.lepton.api.v1.actions;
 
+import com.lepton.api.v1.core.Const;
 import lombok.experimental.UtilityClass;
 
 import java.time.Instant;
@@ -11,7 +12,6 @@ import java.util.Set;
 @UtilityClass
 public class ActionLog {
 	private static final Queue<CompletedAction> completedActions;
-	private static final long magicCutoff = 255;
 	private static long completedIdCount;
 
 	static {
@@ -38,7 +38,7 @@ public class ActionLog {
 			builder.completedAt(Instant.now());
 			completedActions.add(builder.build());
 
-			if (completedActions.size() > magicCutoff) {
+			if (completedActions.size() > Const.Magic.FORGET_ACTIONS_AFTER) {
 				completedActions.remove();
 			}
 		}

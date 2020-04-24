@@ -23,5 +23,6 @@ public class Const {
 	public static class Magic {
 		public static final int STRUCT_INCREMENT = 32;
 		public static final long INVALID_ID = -1;
+		public static final int FORGET_ACTIONS_AFTER = 255;
 	}
 }

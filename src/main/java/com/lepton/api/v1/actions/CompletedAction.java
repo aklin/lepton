@@ -1,16 +1,19 @@
 package com.lepton.api.v1.actions;
 
 import com.lepton.api.v1.core.Resource;
+import lombok.AccessLevel;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import java.time.Instant;
 
 /**
  * Record of a completed action.
  */
-@Data
-@Builder
+@Getter
+@Builder(access = AccessLevel.PACKAGE)
+@EqualsAndHashCode
 public class CompletedAction {
 	/**
 	 * Action identifier

@@ -13,6 +13,10 @@ import lombok.RequiredArgsConstructor;
 /**
  * Action object. Actions have a <b>verb</b>, a <b>subject</b> ({@link Resource}
  * to be acted upon) and an <b>actor</b> (the {@link User} who created the action).
+ * <p>
+ * Actions are submitted to {@link ActionLog} for execution.
+ *
+ * @see CompletedAction
  */
 @Data
 @Getter
