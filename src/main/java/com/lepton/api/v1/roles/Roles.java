@@ -26,7 +26,7 @@ public class Roles {
 			builder.permission(permission);
 		}
 
-		return new Action(Verb.UPDATE,
+		return Action.newAction(Verb.UPDATE,
 			Users.getCurrent(),
 			builder.build());
 	}
@@ -46,7 +46,7 @@ public class Roles {
 
 		builder.permissions(existingPermissions);
 
-		return new Action(Verb.UPDATE,
+		return Action.newAction(Verb.UPDATE,
 			Users.getCurrent(),
 			builder.build());
 	}

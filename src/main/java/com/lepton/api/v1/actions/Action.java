@@ -6,25 +6,31 @@ import com.lepton.api.v1.store.MemoryStore;
 import com.lepton.api.v1.store.Store;
 import com.lepton.api.v1.users.User;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Data
-public class Action {
+@Getter
+@EqualsAndHashCode
+@RequiredArgsConstructor
+public abstract class Action {
 	private final Verb verb;
 	private final User actor;
 	private final Resource subject;
 	private transient boolean hasExecuted = false;
 
-	protected void preExecHook() {
-
+	public static Action newAction(
+		Verb verb,
+		User actor,
+		Resource subject
+	) {
+		return new DefaultAction(verb, actor, subject);
 	}
 
-	protected void onSuccessHook(Resource result) {
+	protected abstract void preExecHook();
 
-	}
-
-	protected void onFailureHook(Exception exception) {
-
-	}
+	protected abstract void onSuccessHook(Resource result);
 
 	public final boolean hasPermissions() {
 		return false;
@@ -76,5 +82,33 @@ public class Action {
 		}
 
 		return null;
+	}
+
+	protected abstract void onFailureHook(Exception exception);
+
+	private static class DefaultAction extends Action {
+
+		DefaultAction(
+			Verb verb,
+			User actor,
+			Resource subject
+		) {
+			super(verb, actor, subject);
+		}
+
+		@Override
+		protected void preExecHook() {
+
+		}
+
+		@Override
+		protected void onSuccessHook(Resource result) {
+
+		}
+
+		@Override
+		protected void onFailureHook(Exception exception) {
+
+		}
 	}
 }

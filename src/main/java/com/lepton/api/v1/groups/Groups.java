@@ -40,7 +40,7 @@ public class Groups {
 			builder.role(role);
 		}
 
-		return new Action(Verb.UPDATE,
+		return Action.newAction(Verb.UPDATE,
 			Users.getCurrent(),
 			builder.build());
 	}
@@ -58,7 +58,7 @@ public class Groups {
 		}
 
 		builder.roles(existingRoles);
-		return new Action(Verb.UPDATE,
+		return Action.newAction(Verb.UPDATE,
 			Users.getCurrent(),
 			builder.build());
 	}
