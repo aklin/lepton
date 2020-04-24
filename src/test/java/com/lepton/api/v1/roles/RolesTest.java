@@ -23,7 +23,7 @@ class RolesTest {
 	}
 
 	@Test
-	void addPermissionToRole() {
+	void grantPermissionTest() {
 
 		final Role role = testRole();
 		final Permission permission1 = testPermission(), permission2 = testPermission(), permission3 = testPermission(), permission4 = testPermission();
@@ -52,21 +52,23 @@ class RolesTest {
 	}
 
 	@Test
-	void removePermissionFromRole() {
-		final Role role = testRole();
+	void revokePermissionTest() {
 		final Permission permission = testPermission();
+		final Role role = Role.builder()
+			.id(roleCount++)
+			.permission(permission)
+			//add a few more
+			.permission(testPermission())
+			.permission(testPermission())
+			.build();
+
 		final Action result;
-		final Role newRole1, newRole2;
 
-		assertEquals(0, role.getPermissions().size());
-		newRole1 = ((Role) Roles.grantPermission(role, permission)
-			.getSubject());
+		assertEquals(3, role.getPermissions().size());
 
-		assertTrue(newRole1.getPermissions().contains(permission));
+		result = Roles.revokePermission(role, permission);
 
-		newRole2 = (Role) Roles.revokePermission(newRole1, permission)
-			.getSubject();
-		assertTrue(newRole2.getPermissions().isEmpty());
+		assertEquals(2, ((Role) result.getSubject()).getPermissions().size());
 
 	}
 

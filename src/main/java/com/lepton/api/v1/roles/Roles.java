@@ -8,7 +8,10 @@ import com.lepton.api.v1.users.Users;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @UtilityClass
 public class Roles {
@@ -36,15 +39,18 @@ public class Roles {
 		@NonNull final Role role,
 		@NonNull final Permission... permissions
 	) {
-		final Role.RoleBuilder builder = role.toBuilder();
-		final Set<Permission> existingPermissions = role.getPermissions();
+		final Role.RoleBuilder builder = role.toBuilder()
+			.permissions(new HashSet<>());
+		final Set<Permission> existing = new HashSet<>(role.getPermissions());
 
+		builder.clearPermissions();
 
-		for (final Permission permission : permissions) {
-			existingPermissions.remove(permission);
-		}
+		existing.removeAll(Arrays.stream(permissions)
+			.collect(Collectors.toCollection(
+				HashSet::new
+			)));
 
-		builder.permissions(existingPermissions);
+		builder.permissions(existing);
 
 		return Action.newAction(Verb.UPDATE,
 			Users.getCurrent(),
