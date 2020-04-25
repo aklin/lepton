@@ -40,7 +40,7 @@ public abstract class Action {
 
 	protected abstract void onSuccessHook(Resource result);
 
-	public final boolean hasPermissions() {
+	private boolean hasPermissions() {
 		return false;
 	}
 
