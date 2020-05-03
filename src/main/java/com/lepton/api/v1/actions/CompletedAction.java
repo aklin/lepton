@@ -16,7 +16,7 @@ import java.time.Instant;
 @EqualsAndHashCode
 public class CompletedAction {
 	/**
-	 * Action identifier
+	 * Action identifier. Assigned after an action has completed.
 	 */
 	private final long id;
 
